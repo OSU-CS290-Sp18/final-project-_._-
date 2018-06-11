@@ -108,93 +108,93 @@ function initMap() {
     });
 
 
-  var pdx2Lax = new google.maps.Polyline({
-    path: [pdx,lax],
-    geodesic: true,
-    strokeColor: '#FF0000',
-    strokeOpacity: 1.0,
-    strokeWeight: 2
-   });
-   pdx2Lax.setMap(map);
-
-  var pdx2Hnl = new google.maps.Polyline({
-     path: [pdx,hnl],
-     geodesic: true,
-     strokeColor: '#FF0000',
-     strokeOpacity: 1.0,
-     strokeWeight: 2
-    });
-    pdx2Hnl.setMap(map);
-
-  var pdx2Ewr = new google.maps.Polyline({
-      path: [pdx,ewr],
-      geodesic: true,
-      strokeColor: '#FF0000',
-      strokeOpacity: 1.0,
-      strokeWeight: 2
-     });
-     pdx2Ewr.setMap(map);
-
-  var pdx2Ord = new google.maps.Polyline({
-       path: [pdx,ord],
-       geodesic: true,
-       strokeColor: '#FF0000',
-       strokeOpacity: 1.0,
-       strokeWeight: 2
-      });
-      pdx2Ord.setMap(map);
-
-  var pdx2Sea = new google.maps.Polyline({
-        path: [pdx,sea],
+    var pdx2Lax = new google.maps.Polyline({
+        path: [pdx, lax],
         geodesic: true,
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
         strokeWeight: 2
-       });
-       pdx2Sea.setMap(map);
+    });
+    pdx2Lax.setMap(map);
 
-  var pdx2Jfk = new google.maps.Polyline({
-         path: [pdx,jfk],
-         geodesic: true,
-         strokeColor: '#FF0000',
-         strokeOpacity: 1.0,
-         strokeWeight: 2
-        });
-        pdx2Jfk.setMap(map);
+    var pdx2Hnl = new google.maps.Polyline({
+        path: [pdx, hnl],
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+    pdx2Hnl.setMap(map);
 
-  var pdx2Las = new google.maps.Polyline({
-          path: [pdx,las],
-          geodesic: true,
-          strokeColor: '#FF0000',
-          strokeOpacity: 1.0,
-          strokeWeight: 2
-          });
-         pdx2Las.setMap(map);
+    var pdx2Ewr = new google.maps.Polyline({
+        path: [pdx, ewr],
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+    pdx2Ewr.setMap(map);
 
-  var pdx2Sfo = new google.maps.Polyline({
-    path: [pdx,sfo],
-    geodesic: true,
-    strokeColor: '#FF0000',
-    strokeOpacity: 1.0,
-    strokeWeight: 2
-   });
-   pdx2Sfo.setMap(map);
+    var pdx2Ord = new google.maps.Polyline({
+        path: [pdx, ord],
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+    pdx2Ord.setMap(map);
 
-  var pdx2Den = new google.maps.Polyline({
-    path: [pdx,den],
-    geodesic: true,
-    strokeColor: '#FF0000',
-    strokeOpacity: 1.0,
-    strokeWeight: 2
-   });
-   pdx2Den.setMap(map);
+    var pdx2Sea = new google.maps.Polyline({
+        path: [pdx, sea],
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+    pdx2Sea.setMap(map);
 
-  var pdx2San = new google.maps.Polyline({
-    path: [pdx,san],
-    geodesic: true,
-    strokeColor: '#FF0000',
-    strokeOpacity: 1.0,
-    strokeWeight: 2
-   });
-   pdx2San.setMap(map);
+    var pdx2Jfk = new google.maps.Polyline({
+        path: [pdx, jfk],
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+    pdx2Jfk.setMap(map);
+
+    var pdx2Las = new google.maps.Polyline({
+        path: [pdx, las],
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+    pdx2Las.setMap(map);
+
+    var pdx2Sfo = new google.maps.Polyline({
+        path: [pdx, sfo],
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+    pdx2Sfo.setMap(map);
+
+    var pdx2Den = new google.maps.Polyline({
+        path: [pdx, den],
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+    pdx2Den.setMap(map);
+
+    var pdx2San = new google.maps.Polyline({
+        path: [pdx, san],
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+    pdx2San.setMap(map);
 }
