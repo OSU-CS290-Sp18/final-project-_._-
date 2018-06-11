@@ -1,43 +1,41 @@
-{
-    "PDX": [{
-        "iata": "LAX",
-        "icao": "KLAX",
-        "airlines": ["AS", "WN", "DL", "AA"]
-    }, {
-        "iata": "HNL",
-        "icao": "PHNL",
-        "airlines": ["AS", "HA"]
-    }, {
-        "iata": "JFK",
-        "icao": "KJFK",
-        "airlines": ["B6", "AS", "DL"]
-    }, {
-        "iata": "ORD",
-        "icao": "KORD",
-        "airlines": ["UA", "AA", "NK", "AS"]
-    }, {
-        "iata": "SEA",
-        "icao": "KSEA",
-        "airlines": ["AS", "DL"]
-    }, {
-        "iata": "LAS",
-        "icao": "KLAS",
-        "airlines": ["WN", "AS", "NK"]
-    }, {
-        "iata": "SFO",
-        "icao": "KSFO",
-        "airlines": ["AS", "WN", "UA"]
-    }, {
-        "iata": "DEN",
-        "icao": "KDEN",
-        "airlines": ["F9", "WN", "UA"]
-    }, {
-        "iata": "EWR",
-        "icao": "KEWR",
-        "airlines": ["AS", "UA"]
-    }, {
-        "iata": "SAN",
-        "icao": "KSAN",
-        "airlines": ["AS", "WN"]
-    }]
-}
+[{
+    "iata": "LAX",
+    "icao": "KLAX",
+    "airlines": ["AS", "WN", "DL", "AA"]
+}, {
+    "iata": "HNL",
+    "icao": "PHNL",
+    "airlines": ["AS", "HA"]
+}, {
+    "iata": "JFK",
+    "icao": "KJFK",
+    "airlines": ["B6", "AS", "DL"]
+}, {
+    "iata": "ORD",
+    "icao": "KORD",
+    "airlines": ["UA", "AA", "NK", "AS"]
+}, {
+    "iata": "SEA",
+    "icao": "KSEA",
+    "airlines": ["AS", "DL"]
+}, {
+    "iata": "LAS",
+    "icao": "KLAS",
+    "airlines": ["WN", "AS", "NK"]
+}, {
+    "iata": "SFO",
+    "icao": "KSFO",
+    "airlines": ["AS", "WN", "UA"]
+}, {
+    "iata": "DEN",
+    "icao": "KDEN",
+    "airlines": ["F9", "WN", "UA"]
+}, {
+    "iata": "EWR",
+    "icao": "KEWR",
+    "airlines": ["AS", "UA"]
+}, {
+    "iata": "SAN",
+    "icao": "KSAN",
+    "airlines": ["AS", "WN"]
+}]
