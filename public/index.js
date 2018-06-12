@@ -7,7 +7,15 @@ function initMap() {
         zoom: 4.5
     });
 
+    var destList = document.getElementsByClassName('dest-list')[0];
+
     var coords = [{
+        iata: "PDX",
+        coords: {
+            lat: 45.5122,
+            lng: -122.6587
+        }
+    }, {
         iata: "LAX",
         coords: {
             lat: 33.9416,
@@ -67,39 +75,37 @@ function initMap() {
             lat: 32.7338,
             lng: -117.1933
         }
-    }, {
-        iata: "PDX",
-        coords: {
-            lat: 45.5122,
-            lng: -122.6587
-        }
     }];
 
-    var markers = {};
-    var paths = {};
 
     coords.forEach((airport) => {
         var markerOptions = {
             position: airport.coords,
-            map: map
+            map: map,
+            label: {
+                text: "test"
+            }
         };
-        var pathOptions = {
+        var polylineOptions = {
             path: [{ lat: 45.5122, lng: -122.6587 }, airport.coords],
             geodesic: true,
             strokeColor: '#FF0000',
             strokeOpacity: 1.0,
-            strokeWeight: 2
+            strokeWeight: 2,
+            map: map
         };
-        markers[airport.iata] = new google.maps.Marker(markerOptions);
-        markers[airport.iata].addListener('click', function() {
-            pathOptions.strokeColor = '#FFFF00';
-            paths[airport.iata] = new google.maps.Polyline(pathOptions).setMap(map);
-            document.getElementsByClassName('dest-list').value = airport.iata;
+
+        var marker = new google.maps.Marker(markerOptions);
+        var polyline = new google.maps.Polyline(polylineOptions);
+
+        marker.addListener('click', function() {
+            destList.value = airport.iata;
         });
-        paths[airport.iata] = new google.maps.Polyline(pathOptions).setMap(map);
     });
 
-
+    destList.addEventListener('change', () => {
+        var value = destList.value;
+    });
 }
 var searchInput = document.getElementsByClassName('search-box');
 searchInput.addEventListener('input', function(){
