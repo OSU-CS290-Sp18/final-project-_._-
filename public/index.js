@@ -93,9 +93,11 @@ function initMap() {
         markers[airport.iata] = new google.maps.Marker(markerOptions);
         markers[airport.iata].addListener('click', function() {
             pathOptions.strokeColor = '#FFFF00';
+            paths[airport.iata] = new google.maps.Polyline(pathOptions).setMap(map);
+            document.getElementsByClassName('dest-list').value = airport.iata;
         });
         paths[airport.iata] = new google.maps.Polyline(pathOptions).setMap(map);
     });
 
-    document.getElementsByClassName
+
 }

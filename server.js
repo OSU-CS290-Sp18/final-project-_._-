@@ -11,7 +11,7 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.status(200).render('airport', {airports: airports});
+    res.status(200).render('airport', {data: airports});
 });
 
 app.get('*', (req, res) => {
