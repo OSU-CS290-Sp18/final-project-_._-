@@ -101,3 +101,17 @@ function initMap() {
 
 
 }
+var searchInput = document.getElementsByClassName('search-box');
+searchInput.addEventListener('input', function(){
+  var index = document.getElementsByClassName('dest-dropdown').length;
+  for(var i = 0; i < index; i++){
+    let tempElem = document.getElementsByClassName('dest-dropdown')[i];
+    if(tempElem.indexOf(this.value.toUpperCase()) == -1){
+
+      //document.getElementsByClassName('dest-list')[0].value = tempElem;
+
+    }
+  }
+
+
+})
