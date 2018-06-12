@@ -1,11 +1,46 @@
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
 #map {
+  width: 95%;
   height: 100%;
+  margin: auto;
 }
 /* Optional: Makes the sample page fill the window. */
 html, body {
+  padding: 10px;
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+header {
+  display: inline-block;
+  background: linear-gradient(to right, blue, white);
+}
+
+.title {
+  font-family: 'Lobster', cursive;
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-right: 50px;
+  font-size: 50px;
+}
+
+.dest-dropdown {
+  display: inline-block;
+  float: right;
+  margin-top: 15px;
+  margin-left: 50px;
+  margin-right: 700px;
+}
+
+.dest-search {
+  display: inline-block;
+  float: right;
+  margin-top: 48px;
+}
+
+.hidden {
+  display: none;
 }
