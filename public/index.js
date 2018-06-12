@@ -77,7 +77,6 @@ function initMap() {
         }
     }];
 
-
     coords.forEach((airport) => {
         var markerOptions = {
             position: airport.coords,
