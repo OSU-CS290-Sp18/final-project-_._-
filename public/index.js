@@ -91,6 +91,9 @@ function initMap() {
             strokeWeight: 2
         };
         markers[airport.iata] = new google.maps.Marker(markerOptions);
+        markers[airport.iata].addListener('click', function() {
+            pathOptions.strokeColor = '#FFFF00';
+        });
         paths[airport.iata] = new google.maps.Polyline(pathOptions).setMap(map);
     });
 
