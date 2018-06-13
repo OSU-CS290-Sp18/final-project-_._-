@@ -1,4 +1,3 @@
-<!-- Everything in the header should be inline-->
 <header>
 
     <h1 class="title">FliteMapper</h1>
@@ -6,15 +5,10 @@
     <div class="dest-dropdown">
         <p>Choose your destination: </p>
         <select class="dest-list">
-            {{#each data}}
+            {{#each routes}}
                 {{> listOption}}
             {{/each}}
         </select>
-    </div>
-
-    <div class="dest-search">
-        <input class="search-box"></input>
-        <button class="search-button">Search</button>
     </div>
 
 </header>
