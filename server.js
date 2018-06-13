@@ -23,22 +23,13 @@ app.use(express.static('public'));
 let mongoDB = null;
 app.get('/', (req, res) => {
     const routes = mongoDB.collection('routes').find({});
-    const coords = mongoDB.collection('coords').find({});
 
     routes.toArray((err, routeDocs) => {
         if (err) {
             res.status(500).send("Error fetching routes from DB.");
         } else {
-            console.log(routeDocs);
-            coords.toArray((err, coordsDocs) => {
-                if (err) {
-                    res.status(500).send("Error fetching coords from DB.");
-                } else {
-                    console.log(coordsDocs);
-                    res.status(200).render('airport', {
-                        routes: routeDocs
-                    });
-                }
+            res.status(200).render('airport', {
+                routes: routeDocs
             });
         }
     });
@@ -48,9 +39,9 @@ app.get('*', (req, res) => {
     res.status(404).render('404');
 });
 
-MongoClient.connect(mongoURL, (err, client) => {
-    if (err) {
-        throw err;
+MongoClient.connect(mongoURL, (e, client) => {
+    if (e) {
+        throw e;
     }
     mongoDB = client.db(mongoDBName);
     app.listen(port, () => {
