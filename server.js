@@ -11,8 +11,6 @@ const mongoDBName = "cs290_shieldse";
 const mongoURL = 'mongodb://' + mongoUser + ':' + mongoPassword + '@' +
     mongoHost + ':' + mongoPort + '/' + mongoDBName;
 
-let mongoDB = null;
-
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -22,25 +20,23 @@ app.engine('handlebars', exphb({
 app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 
+let mongoDB = null;
 app.get('/', (req, res) => {
-    const routes = mongoDB.collection('routes');
-    const coords = mongoDB.collection('coords');
-    const routesCursor = routes.find({});
-    const coordsCursor = coords.find({});
+    const routes = mongoDB.collection('routes').find({});
+    const coords = mongoDB.collection('coords').find({});
 
-    routesCursor.toArray((err, routeDocs) => {
+    routes.toArray((err, routeDocs) => {
         if (err) {
             res.status(500).send("Error fetching routes from DB.");
         } else {
             console.log(routeDocs);
-            coordsCursor.toArray((err, coordsDocs) => {
+            coords.toArray((err, coordsDocs) => {
                 if (err) {
                     res.status(500).send("Error fetching coords from DB.");
                 } else {
                     console.log(coordsDocs);
                     res.status(200).render('airport', {
-                        routes: routeDocs,
-                        coords: coordsDocs
+                        routes: routeDocs
                     });
                 }
             });
