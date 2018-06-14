@@ -40,9 +40,7 @@ app.get('*', (req, res) => {
 });
 
 MongoClient.connect(mongoURL, (e, client) => {
-    if (e) {
-        throw e;
-    }
+    if (e) throw e;
     mongoDB = client.db(mongoDBName);
     app.listen(port, () => {
         console.log("== Server listening on port 3000");
