@@ -31,15 +31,22 @@ header {
   display: inline-block;
   float: right;
   margin-top: 15px;
-  margin-left: 50px;
-  margin-right: 700px;
+  margin-left: 1350px;
 }
 
-.dest-search {
+p {
+  font-family: 'Roboto';
+}
+
+.dest-item {
+  background-color: DodgerBlue;
+}
+
+/* .dest-search {
   display: inline-block;
   float: right;
   margin-top: 48px;
-}
+} */
 
 .hidden {
   display: none;
