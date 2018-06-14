@@ -108,6 +108,8 @@ function addWatchItem(iata) {
     const url = '/add/' + iata;
     request.open("POST", url);
 
+    alert('Added ' + iata + ' to watchlist');
+
     var requestBody = JSON.stringify({
         iata: iata,
         coords: getCoords(iata)
