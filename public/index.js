@@ -38,29 +38,30 @@ function addRoutes(map) {
             content: buildInfoWindowContent(airport)
         };
 
-        var marker = new google.maps.Marker(markerOptions);
-        var polyline = new google.maps.Polyline(polylineOptions);
-        var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-
         itemList[airport.iata] = {
-            marker: marker,
-            polyline: polyline,
-            infoWindow: infoWindow
+            marker: new google.maps.Marker(markerOptions),
+            polyline: new google.maps.Polyline(polylineOptions),
+            infoWindow: new google.maps.InfoWindow(infoWindowOptions)
         };
 
-        marker.addListener('click', function() {
+        itemList[airport.iata].marker.addListener('click', function() {
             destList.value = airport.iata;
             markerClick(map, itemList, airport.iata);
         });
     });
 
+    addEventListeners(map, itemList)
+}
+
+function addEventListeners(map, items) {
+    const destList = document.getElementsByClassName('dest-list')[0];
+
     map.addListener('click', () => {
-        resetRoutes(itemList);
+        resetRoutes(items);
     });
 
-    destList.addEventListener('change', () => {
-        var value = destList.value;
-        markerClick(map, itemList, value);
+    destList.addEventListener('change', ()=> {
+        markerClick(map, items, destList.value);
     });
 }
 
@@ -93,99 +94,109 @@ function resetRoutes(items) {
 }
 
 function buildInfoWindowContent(airport) {
-    let content = "<p>Airlines: ";
+    let content = '<p>Airlines: ';
     airport.airlines.forEach((airline) => {
-        content += airline + " ";
+        content += airline + ' ';
     });
-    content += "</p>\n";
-    content += "<a href='#' onclick='addWatchItem(" + airport.iata + ")'>+ Watch</a>"
+    content += '</p>\n';
+    content += '<a href="#" onclick="addWatchItem(\'' + airport.iata + '\')">+ Watch</a>';
     return content;
 }
 
 function addWatchItem(iata) {
-    console.log('Watching ' + iata);
+    const request = new XMLHttpRequest();
+    const url = '/add/' + iata;
+    request.open("POST", url);
+
+    var requestBody = JSON.stringify({
+        iata: iata,
+        coords: getCoords(iata)
+    });
+
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(requestBody);
 }
 
 const mapStyle = [{
-    "featureType": "administrative",
-    "elementType": "all",
-    "stylers": [{
-        "saturation": "-100"
+    'featureType': 'administrative',
+    'elementType': 'all',
+    'stylers': [{
+        'saturation': '-100'
     }]
 }, {
-    "featureType": "administrative.province",
-    "elementType": "all",
-    "stylers": [{
-        "visibility": "off"
+    'featureType': 'administrative.province',
+    'elementType': 'all',
+    'stylers': [{
+        'visibility': 'off'
     }]
 }, {
-    "featureType": "landscape",
-    "elementType": "all",
-    "stylers": [{
-        "saturation": -100
+    'featureType': 'landscape',
+    'elementType': 'all',
+    'stylers': [{
+        'saturation': -100
     }, {
-        "lightness": 65
+        'lightness': 65
     }, {
-        "visibility": "on"
+        'visibility': 'on'
     }]
 }, {
-    "featureType": "poi",
-    "elementType": "all",
-    "stylers": [{
-        "saturation": -100
+    'featureType': 'poi',
+    'elementType': 'all',
+    'stylers': [{
+        'saturation': -100
     }, {
-        "lightness": "50"
+        'lightness': '50'
     }, {
-        "visibility": "simplified"
+        'visibility': 'simplified'
     }]
 }, {
-    "featureType": "road",
-    "elementType": "all",
-    "stylers": [{
-        "saturation": "-100"
+    'featureType': 'road',
+    'elementType': 'all',
+    'stylers': [{
+        'saturation': '-100'
     }]
 }, {
-    "featureType": "road.highway",
-    "elementType": "all",
-    "stylers": [{
-        "visibility": "simplified"
+    'featureType': 'road.highway',
+    'elementType': 'all',
+    'stylers': [{
+        'visibility': 'simplified'
     }]
 }, {
-    "featureType": "road.arterial",
-    "elementType": "all",
-    "stylers": [{
-        "lightness": "30"
+    'featureType': 'road.arterial',
+    'elementType': 'all',
+    'stylers': [{
+        'lightness': '30'
     }]
 }, {
-    "featureType": "road.local",
-    "elementType": "all",
-    "stylers": [{
-        "lightness": "40"
+    'featureType': 'road.local',
+    'elementType': 'all',
+    'stylers': [{
+        'lightness': '40'
     }]
 }, {
-    "featureType": "transit",
-    "elementType": "all",
-    "stylers": [{
-        "saturation": -100
+    'featureType': 'transit',
+    'elementType': 'all',
+    'stylers': [{
+        'saturation': -100
     }, {
-        "visibility": "simplified"
+        'visibility': 'simplified'
     }]
 }, {
-    "featureType": "water",
-    "elementType": "geometry",
-    "stylers": [{
-        "hue": "#ffff00"
+    'featureType': 'water',
+    'elementType': 'geometry',
+    'stylers': [{
+        'hue': '#ffff00'
     }, {
-        "lightness": -25
+        'lightness': -25
     }, {
-        "saturation": -97
+        'saturation': -97
     }]
 }, {
-    "featureType": "water",
-    "elementType": "labels",
-    "stylers": [{
-        "lightness": -25
+    'featureType': 'water',
+    'elementType': 'labels',
+    'stylers': [{
+        'lightness': -25
     }, {
-        "saturation": -100
+        'saturation': -100
     }]
 }];
