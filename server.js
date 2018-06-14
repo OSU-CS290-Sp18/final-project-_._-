@@ -22,14 +22,23 @@ app.use(express.static('public'));
 
 let mongoDB = null;
 app.get('/', (req, res) => {
-    const routes = mongoDB.collection('routes').find({});
+    routes = mongoDB.collection('routes').find({});
+    coords = mongoDB.collection('coords').find({});
 
     routes.toArray((err, routeDocs) => {
         if (err) {
             res.status(500).send("Error fetching routes from DB.");
         } else {
-            res.status(200).render('airport', {
-                routes: routeDocs
+            coords.toArray((err, coordsDocs) => {
+                if (err) {
+                    res.status(500).send("Error fetching routes from DB.");
+                } else {
+                    res.status(200).render('airport', {
+                        routes: routeDocs,
+                        routesString: JSON.stringify(routeDocs),
+                        coordsString: JSON.stringify(coordsDocs)
+                    });
+                }
             });
         }
     });

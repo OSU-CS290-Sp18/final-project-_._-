@@ -7,11 +7,16 @@ function initMap() {
         styles: mapStyle
     });
 
+    addRoutes(map);
+}
+
+function addRoutes(map) {
     var destList = document.getElementsByClassName('dest-list')[0];
 
-    coords.forEach((airport) => {
-        var markerOptions = {
-            position: airport.coords,
+    routes.forEach((airport) => {
+        var location = getCoords(airport.iata);
+        const markerOptions = {
+            position: location,
             map: map,
             label: {
                 fontSize: '9',
@@ -19,19 +24,19 @@ function initMap() {
                 text: airport.iata
             }
         };
-        var polylineOptions = {
-            path: [{
-                lat: 45.5122,
-                lng: -122.6587
-            }, airport.coords],
+        const polylineOptions = {
+            path: [
+                { lat: 45.5122, lng: -122.6587 },
+                location
+            ],
             geodesic: true,
             strokeColor: '#FF0000',
             strokeOpacity: 1.0,
             strokeWeight: 2,
             map: map
         };
-        var infoWindowOptions = {
-            content: "<a href='#' onclick='addWatchItem(' + ')'>+ Watch</a>"
+        const infoWindowOptions = {
+            content: buildInfoWindowContent(airport)
         };
 
         var marker = new google.maps.Marker(markerOptions);
@@ -40,13 +45,14 @@ function initMap() {
 
         marker.addListener('click', function() {
             destList.value = airport.iata;
+            for (var key in itemList) {
+                var item = itemList[key];
+                item.infoWindow.close();
+            }
             infoWindow.open(map, marker);
         });
 
-        itemList[airport] = {
-            markerOptions: markerOptions,
-            polylineOptions: polylineOptions,
-            infoWindowOptions: infoWindowOptions,
+        itemList[airport.iata] = {
             marker: marker,
             polyline: polyline,
             infoWindow: infoWindow
@@ -58,73 +64,27 @@ function initMap() {
     });
 }
 
-const coords = [{
-    "iata": "PDX",
-    "coords": {
-        "lat": 45.5122,
-        "lng": -122.6587
+function getCoords(iata) {
+    for (let i = 0; i < coords.length; i++) {
+        const airport = coords[i];
+        if (iata == airport.iata) {
+            return airport.coords;
+        }
     }
-}, {
-    "iata": "LAX",
-    "coords": {
-        "lat": 33.9416,
-        "lng": -118.4085
-    }
-}, {
-    "iata": "HNL",
-    "coords": {
-        "lat": 21.3245,
-        "lng": -157.9251
-    }
-}, {
-    "iata": "EWR",
-    "coords": {
-        "lat": 40.6895,
-        "lng": -74.1745
-    }
-}, {
-    "iata": "ORD",
-    "coords": {
-        "lat": 41.9742,
-        "lng": -87.9073
-    }
-}, {
-    "iata": "SEA",
-    "coords": {
-        "lat": 47.4502,
-        "lng": -122.3088
-    }
-}, {
-    "iata": "JFK",
-    "coords": {
-        "lat": 40.6413,
-        "lng": -73.7781
-    }
-}, {
-    "iata": "LAS",
-    "coords": {
-        "lat": 36.0840,
-        "lng": -115.1537
-    }
-}, {
-    "iata": "SFO",
-    "coords": {
-        "lat": 37.6213,
-        "lng": -122.3790
-    }
-}, {
-    "iata": "DEN",
-    "coords": {
-        "lat": 39.8561,
-        "lng": -104.6737
-    }
-}, {
-    "iata": "SAN",
-    "coords": {
-        "lat": 32.7338,
-        "lng": -117.1933
-    }
-}];
+}
+
+function buildInfoWindowContent(airport) {
+    let content = "<p>Airlines: ";
+    airport.airlines.forEach((airline) => {
+        content += airline + " ";
+    });
+    content += "</p>\n";
+    content += "<a href='#' onclick='addWatchItem(" + airport.iata + ")'>+ Watch</a>"
+}
+
+function addWatchItem(iata) {
+    console.log('Watching ' + iata);
+}
 
 const mapStyle = [{
     "featureType": "administrative",
