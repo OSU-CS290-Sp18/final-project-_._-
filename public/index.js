@@ -1,5 +1,3 @@
-var itemList = {};
-
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 36, lng: -115 },
@@ -12,9 +10,10 @@ function initMap() {
 
 function addRoutes(map) {
     var destList = document.getElementsByClassName('dest-list')[0];
+    var itemList = {};
 
     routes.forEach((airport) => {
-        var location = getCoords(airport.iata);
+        const location = getCoords(airport.iata);
         const markerOptions = {
             position: location,
             map: map,
@@ -43,24 +42,25 @@ function addRoutes(map) {
         var polyline = new google.maps.Polyline(polylineOptions);
         var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
 
-        marker.addListener('click', function() {
-            destList.value = airport.iata;
-            for (var key in itemList) {
-                var item = itemList[key];
-                item.infoWindow.close();
-            }
-            infoWindow.open(map, marker);
-        });
-
         itemList[airport.iata] = {
             marker: marker,
             polyline: polyline,
             infoWindow: infoWindow
         };
+
+        marker.addListener('click', function() {
+            destList.value = airport.iata;
+            markerClick(map, itemList, airport.iata);
+        });
+    });
+
+    map.addListener('click', () => {
+        resetRoutes(itemList);
     });
 
     destList.addEventListener('change', () => {
         var value = destList.value;
+        markerClick(map, itemList, value);
     });
 }
 
@@ -73,6 +73,25 @@ function getCoords(iata) {
     }
 }
 
+function markerClick(map, items, iata) {
+    const marker = items[iata].marker;
+    const polyline = items[iata].polyline;
+    const infoWindow = items[iata].infoWindow;
+
+    resetRoutes(items);
+
+    polyline.setOptions({strokeColor: '#FFFF00'});
+    infoWindow.open(map, marker);
+}
+
+function resetRoutes(items) {
+    for (var key in items) {
+        var item = items[key];
+        item.polyline.setOptions({strokeColor: '#FF0000'});
+        item.infoWindow.close();
+    }
+}
+
 function buildInfoWindowContent(airport) {
     let content = "<p>Airlines: ";
     airport.airlines.forEach((airline) => {
@@ -80,6 +99,7 @@ function buildInfoWindowContent(airport) {
     });
     content += "</p>\n";
     content += "<a href='#' onclick='addWatchItem(" + airport.iata + ")'>+ Watch</a>"
+    return content;
 }
 
 function addWatchItem(iata) {
